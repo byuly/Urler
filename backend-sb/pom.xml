@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.urler</groupId>
-	<artifactId>urler</artifactId>
+	<artifactId>backend-sb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>urler</name>
 	<description>url shortener</description>
