@@ -12,5 +12,9 @@ public class Clicks {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime clickDate;
+
+    @ManyToOne
+    @JoinColumn(name = "url_id")
+    private Url url;
     
 }
