@@ -1,4 +1,4 @@
-package com.urler.sb;
+package com.urler;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
