@@ -1,5 +1,6 @@
 package com.urler.table;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 
