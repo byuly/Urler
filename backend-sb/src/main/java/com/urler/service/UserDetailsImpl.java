@@ -1,5 +1,4 @@
 package com.urler.service;
-
 import com.urler.table.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
