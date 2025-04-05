@@ -1,10 +1,13 @@
 package com.urler.service;
 import com.urler.table.User;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.io.Serial;
 import java.util.Collection;
 import java.util.Collections;
@@ -29,6 +32,7 @@ public class UserDetailsImpl implements UserDetails { // UserDetails interface f
         this.authorities = authorities;
     }
 
+    // build user from our database to UserDetailsImpl for Spring Security
     public static UserDetailsImpl build(User user) {
         GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
         return new UserDetailsImpl(
