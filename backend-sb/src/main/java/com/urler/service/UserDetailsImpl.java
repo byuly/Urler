@@ -11,7 +11,7 @@ import java.util.Collections;
 
 @Data
 @NoArgsConstructor
-public class UserDetailsImpl implements UserDetails {
+public class UserDetailsImpl implements UserDetails { // UserDetails interface for how security details are implemented
     @Serial
     private static final long serialVersionUID = 1L;
 
