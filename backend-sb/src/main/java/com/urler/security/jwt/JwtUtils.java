@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.validation.annotation.Validated;
 
+import javax.crypto.SecretKey;
 import java.security.Key;
 import java.time.Instant;
 import java.util.Base64;
@@ -30,6 +31,15 @@ public class JwtUtils {
             return bearerToken.substring(7);
         }
         return null;
+    }
+
+    public String getUsernameFromJwt(String token) {
+        return Jwts.parser()
+                .verifyWith((SecretKey) key())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .getSubject();
     }
 
     // generating token
