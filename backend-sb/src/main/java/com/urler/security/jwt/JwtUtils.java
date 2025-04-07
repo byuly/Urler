@@ -1,6 +1,7 @@
 package com.urler.security.jwt;
 
 import com.urler.service.UserDetailsImpl;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -60,5 +61,15 @@ public class JwtUtils {
 
     private Key key() {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser().verifyWith((SecretKey) key())
+                    .build().parseSignedClaims(token);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return true;
     }
 }
