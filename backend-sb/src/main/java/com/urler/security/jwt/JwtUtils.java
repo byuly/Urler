@@ -42,6 +42,7 @@ public class JwtUtils {
                 .getSubject();
     }
 
+
     // generating token
     public String generateJwtToken(UserDetailsImpl userDetails) {
         String username = userDetails.getUsername();
