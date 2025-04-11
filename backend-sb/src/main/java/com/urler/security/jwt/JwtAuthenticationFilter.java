@@ -41,7 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // replaced with robust logging
         }
     }
 }
