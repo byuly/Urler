@@ -4,6 +4,8 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,19 +20,20 @@ import java.io.IOException;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private JwtUtils jwtTokenProvider;
+    private final JwtUtils jwtTokenProvider;
+    private final UserDetailsService userDetailsService;
+    private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
-    @Autowired
-    private UserDetailsService userDetailsService;
-
+    public JwtAuthenticationFilter(JwtUtils jwtTokenProvider, UserDetailsService userDetailsService) {
+        this.jwtTokenProvider = jwtTokenProvider;
+        this.userDetailsService = userDetailsService;
+    }
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // how to authenticate the request?
 
         try {
             String jwt = jwtTokenProvider.getJwtFromHeader(request);
-
             if (jwt != null && jwtTokenProvider.validateToken(jwt)){
                 String username = jwtTokenProvider.getUsernameFromJwt(jwt);
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -41,7 +44,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace(); // replaced with robust logging
+            logger.error("Could not set user authentication in security context", e);
         }
     }
 }
