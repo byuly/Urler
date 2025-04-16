@@ -3,7 +3,6 @@ package com.urler.service;
 import com.urler.repository.UserRepository;
 import com.urler.table.User;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
