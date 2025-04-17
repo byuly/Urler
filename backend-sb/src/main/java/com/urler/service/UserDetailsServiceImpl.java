@@ -1,5 +1,4 @@
 package com.urler.service;
-
 import com.urler.repository.UserRepository;
 import com.urler.table.User;
 import jakarta.transaction.Transactional;
