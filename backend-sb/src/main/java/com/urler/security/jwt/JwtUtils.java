@@ -36,6 +36,10 @@ public class JwtUtils {
         return null;
     }
 
+    private Key key() {
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
+    }
+
     public String getUsernameFromJwt(String token) {
         return Jwts.parser()
                 .verifyWith((SecretKey) key())
@@ -59,10 +63,6 @@ public class JwtUtils {
                 .expiration(new Date(System.currentTimeMillis() + Long.parseLong(jwtExpiration)))
                 .signWith(key())
                 .compact();
-    }
-
-    private Key key() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
     public boolean validateToken(String token) {
