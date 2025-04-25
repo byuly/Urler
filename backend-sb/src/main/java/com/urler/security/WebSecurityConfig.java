@@ -1,5 +1,4 @@
 package com.urler.security;
-
 import com.urler.security.jwt.JwtAuthenticationFilter;
 import com.urler.security.jwt.JwtUtils;
 import com.urler.service.UserDetailsServiceImpl;
