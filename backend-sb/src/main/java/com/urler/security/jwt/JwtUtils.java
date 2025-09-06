@@ -1,7 +1,6 @@
 package com.urler.security.jwt;
 
-import com.urler.service.UserDetailsImpl;
-import io.jsonwebtoken.JwtException;
+import com.urler.table.UserDetailsImpl;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -9,12 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.annotation.Validated;
 
 import javax.crypto.SecretKey;
 import java.security.Key;
-import java.time.Instant;
-import java.util.Base64;
 import java.util.Date;
 import java.util.stream.Collectors;
 
@@ -34,6 +30,10 @@ public class JwtUtils {
             return bearerToken.substring(7);
         }
         return null;
+    }
+
+    private Key key() {
+        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
     public String getUsernameFromJwt(String token) {
@@ -59,10 +59,6 @@ public class JwtUtils {
                 .expiration(new Date(System.currentTimeMillis() + Long.parseLong(jwtExpiration)))
                 .signWith(key())
                 .compact();
-    }
-
-    private Key key() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
     public boolean validateToken(String token) {
