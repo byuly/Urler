@@ -3,3 +3,17 @@
 *.iws
 *.iml
 *.ipr
+
+### macOS ###
+.DS_Store
+
+### Bruno API Client ###
+bruno_urler/
+
+### Environment files ###
+.env
+*.env
+
+### Maven/Spring Boot ###
+target/
+!.mvn/wrapper/maven-wrapper.jar

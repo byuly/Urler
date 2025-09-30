@@ -8,6 +8,8 @@ services:
       - 'POSTGRES_USER=myuser'
     ports:
       - '5432:5432'
+    networks:
+      - urler-network
 
   pgadmin:
     container_name: pgadmin
@@ -20,3 +22,25 @@ services:
       PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
     ports:
       - '5050:5050'
+    networks:
+      - urler-network
+
+  backend-sb:
+    container_name: backend-sb
+    build:
+      context: ./backend-sb
+      dockerfile: Dockerfile
+    ports:
+      - '8080:8080'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/urler
+      - SPRING_DATASOURCE_USERNAME=myuser
+      - SPRING_DATASOURCE_PASSWORD=secret
+    depends_on:
+      - postgres
+    networks:
+      - urler-network
+
+networks:
+  urler-network:
+    driver: bridge
