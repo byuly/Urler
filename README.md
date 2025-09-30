@@ -1,52 +1,99 @@
-# Urler | URL Analytics Platform  аналиitics
+# Urler | URL Analytics Platform
 
-`Urler` is a full-stack web application designed to shorten long URLs and provide detailed analytics on their usage. It offers a clean interface for users to create short links and monitor their performance through a real-time dashboard.
+**Urler** is a full-stack web application for shortening long URLs and tracking their usage with real-time analytics. It provides a clean, intuitive interface for creating short links and monitoring their performance.
 
-## Core Features
+## 🚀 Features
 
-*   **URL Shortening:** Convert long, cumbersome URLs into short, easy-to-share links.
-*   **Click Tracking:** Automatically track every time a shortened link is clicked.
-*   **Analytics Dashboard:** View click data, including total clicks and other metrics, updated in real-time.
-*   **User Authentication:** Securely manage your links under your own account.
+* **URL Shortening** – Convert long URLs into short, easy-to-share links.
+* **Click Tracking** – Capture every click on shortened URLs.
+* **Analytics Dashboard** – View click metrics updated in real time.
+* **User Authentication** – Securely manage links under individual accounts.
 
-## Tech Stack
+## 😲 Tech Stack
 
 ### Frontend
-*   **Framework:** Next.js (React)
-*   **Language:** TypeScript
+
+* **Framework:** Next.js (React)
+* **Language:** TypeScript
 
 ### Backend
-*   **Framework:** Spring Boot
-*   **Language:** Java
-*   **Real-time Communication:** WebSockets
-*   **Security:** Spring Security with JWT
+
+* **Framework:** Spring Boot
+* **Language:** Java
+* **Real-time Communication:** WebSockets
+* **Security:** Spring Security + JWT
 
 ### Infrastructure
-*   **Containerization:** Docker
+
+* **Database:** PostgreSQL
+* **Containerization:** Docker
 
 ## Architecture
 
-Here is a high-level overview of the application's architecture.
-
 ```mermaid
 graph TD
-    subgraph "Client"
-        User[User] --> Frontend[Next.js Frontend]
+    subgraph Client
+        User[User]
+        Frontend[Next.js Frontend]
+        User --> Frontend
     end
 
-    subgraph "Backend (Spring Boot)"
-        API[REST API <br> (Auth, URL Management)]
-        Websocket[WebSocket <br> (Real-time Analytics)]
+    subgraph Backend
+        API[REST API - Authentication & URL Management]
+        WebSocket[WebSocket - Real-time Analytics]
         Redirect[Redirect Service]
+        Frontend -->|HTTP/S| API
+        Frontend -->|WebSocket| WebSocket
+        User -->|Access Short URL| Redirect
     end
 
-    subgraph "Data Layer"
-        Database[(PostgreSQL)]
+    subgraph Database
+        DB[(PostgreSQL)]
+        API --> DB
+        Redirect --> DB
     end
 
-    Frontend -- "HTTP/S" --> API
-    Frontend -- "WebSocket" --> Websocket
-    User -- "Access Short URL" --> Redirect
-    API --> Database
-    Redirect --> Database
 ```
+
+## 📦 Getting Started
+
+### Prerequisites
+
+* Node.js (>=18)
+* Java (>=17)
+* Docker (optional, for containerized deployment)
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/your-username/urler.git
+   cd urler
+   ```
+
+2. **Frontend Setup**
+
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+   ```
+
+3. **Backend Setup**
+
+   ```bash
+   cd backend
+   ./mvnw spring-boot:run
+   ```
+
+4. **(Optional) Run with Docker**
+
+   ```bash
+   docker-compose up --build
+   ```
+* [ ] Export analytics reports
+
+## 📝 License
+
+This project is licensed under the [MIT License](LICENSE).
