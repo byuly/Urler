@@ -1,5 +1,6 @@
 package com.urler.service;
 
+import com.urler.dto.ClickEventMessage;
 import com.urler.dto.ClicksDto;
 import com.urler.dto.UrlDto;
 import com.urler.table.Clicks;
@@ -8,6 +9,7 @@ import com.urler.table.User;
 import com.urler.repository.ClicksRepository;
 import com.urler.repository.UrlRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,6 +25,7 @@ public class UrlService {
 
     private UrlRepository urlRepository;
     private ClicksRepository clicksRepository;
+    private SimpMessagingTemplate messagingTemplate;
 
     public UrlDto createShortUrl(String originalUrl, User user) {
         String shortUrl = generateShortUrl();
@@ -96,10 +99,15 @@ public class UrlService {
             urlRepository.save(url);
 
             // Record Click Event
+            LocalDateTime now = LocalDateTime.now();
             Clicks clicks = new Clicks();
-            clicks.setClickDate(LocalDateTime.now());
+            clicks.setClickDate(now);
             clicks.setUrl(url);
             clicksRepository.save(clicks);
+
+            // Publish WebSocket message
+            ClickEventMessage message = new ClickEventMessage(url.getId(), url.getClicks(), now);
+            messagingTemplate.convertAndSend("/topic/clicks/" + url.getId(), message);
         }
 
         return url;
