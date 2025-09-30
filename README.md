@@ -92,8 +92,3 @@ graph TD
    ```bash
    docker-compose up --build
    ```
-* [ ] Export analytics reports
-
-## 📝 License
-
-This project is licensed under the [MIT License](LICENSE).
