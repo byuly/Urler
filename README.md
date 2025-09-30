@@ -39,10 +39,10 @@ graph TD
     end
 
     subgraph Backend
-        API[REST API - Authentication & URL Management]
-        WebSocket[WebSocket - Real-time Analytics]
+        API[Auth & URL management]
+        WebSocket[live click analytics]
         Redirect[Redirect Service]
-        Frontend -->|HTTP/S| API
+        Frontend -->|REST API| API
         Frontend -->|WebSocket| WebSocket
         User -->|Access Short URL| Redirect
     end
@@ -68,7 +68,7 @@ graph TD
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/your-username/urler.git
+   git clone https://github.com/byuly/Urler.git
    cd urler
    ```
 
