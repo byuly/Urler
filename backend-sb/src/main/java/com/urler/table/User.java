@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "users")
 public class User {
     @Id // Primary Key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID will be generated in incremental order
