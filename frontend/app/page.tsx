@@ -6,22 +6,21 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-6xl mx-auto px-4 py-20">
         {/* Hero Section */}
-        <div className="text-center mb-24 animate-fade-in">
-          <h1 className="text-7xl md:text-8xl font-black mb-6 leading-tight tracking-tight">
-            <span className="text-gray-900 dark:text-white">Shorten Your URLs</span>
-            <span className="block gradient-text mt-2">Instantly</span>
+        <div className="text-center mb-20 animate-fade-in">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 leading-tight">
+            <span className="text-gray-900 dark:text-white">Shorten URLs</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
-            Create short, memorable links for your long URLs. Track clicks in real-time and manage all your links in one beautiful dashboard.
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+            Create short, memorable links. Track clicks in real-time.
           </p>
           <div className="flex gap-4 justify-center flex-wrap animate-slide-up">
             <Link href="/login">
-              <Button size="lg" className="shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
-                Get Started Free
+              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-semibold px-8 py-6 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 border-0">
+                Get Started Free →
               </Button>
             </Link>
             <Link href="/dashboard">
-              <Button size="lg" variant="outline" className="hover:scale-105 transition-all duration-300">
+              <Button size="lg" variant="outline" className="font-semibold px-8 py-6 rounded-xl border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:scale-105 transition-all duration-300">
                 View Dashboard
               </Button>
             </Link>
