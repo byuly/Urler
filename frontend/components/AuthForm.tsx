@@ -74,63 +74,90 @@ export function AuthForm() {
   };
 
   return (
-    <Card className="w-full max-w-md">
+    <Card className="w-full max-w-md animate-scale-in shadow-2xl hover:shadow-3xl transition-shadow duration-300">
       <CardHeader>
-        <CardTitle>{mode === 'login' ? 'Login' : 'Register'}</CardTitle>
+        <CardTitle className="text-3xl text-center">
+          {mode === 'login' ? '🔐 Welcome Back' : '✨ Create Account'}
+        </CardTitle>
+        <p className="text-center text-gray-600 dark:text-gray-400 mt-2">
+          {mode === 'login' ? 'Login to your account' : 'Sign up to get started'}
+        </p>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <Input
-            label="Username"
-            placeholder="Enter your username"
-            {...registerField('username', { required: 'Username is required' })}
-            error={errors.username?.message as string}
-          />
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <div className="animate-fade-in">
+            <Input
+              label="Username"
+              placeholder="Enter your username"
+              {...registerField('username', { required: 'Username is required' })}
+              error={errors.username?.message as string}
+              className="transition-all duration-300 focus:scale-105"
+            />
+          </div>
 
           {mode === 'register' && (
-            <Input
-              label="Email"
-              type="email"
-              placeholder="Enter your email"
-              {...registerField('email', {
-                required: 'Email is required',
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Invalid email address',
-                },
-              })}
-              error={errors.email?.message as string}
-            />
+            <div className="animate-scale-in">
+              <Input
+                label="Email"
+                type="email"
+                placeholder="Enter your email"
+                {...registerField('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: 'Invalid email address',
+                  },
+                })}
+                error={errors.email?.message as string}
+                className="transition-all duration-300 focus:scale-105"
+              />
+            </div>
           )}
 
-          <Input
-            label="Password"
-            type="password"
-            placeholder="Enter your password"
-            {...registerField('password', {
-              required: 'Password is required',
-              minLength: {
-                value: 6,
-                message: 'Password must be at least 6 characters',
-              },
-            })}
-            error={errors.password?.message as string}
-          />
+          <div className="animate-fade-in">
+            <Input
+              label="Password"
+              type="password"
+              placeholder="Enter your password"
+              {...registerField('password', {
+                required: 'Password is required',
+                minLength: {
+                  value: 6,
+                  message: 'Password must be at least 6 characters',
+                },
+              })}
+              error={errors.password?.message as string}
+              className="transition-all duration-300 focus:scale-105"
+            />
+          </div>
 
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? 'Loading...' : mode === 'login' ? 'Login' : 'Register'}
+          <Button
+            type="submit"
+            className={`w-full ${isLoading ? 'animate-pulse' : 'hover:scale-105'} transition-all duration-300 shadow-lg hover:shadow-xl text-lg py-6`}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <span className="flex items-center justify-center gap-2">
+                <span className="animate-spin">⚡</span>
+                {mode === 'login' ? 'Logging in...' : 'Creating account...'}
+              </span>
+            ) : mode === 'login' ? (
+              '🚀 Login'
+            ) : (
+              '🎉 Create Account'
+            )}
           </Button>
         </form>
 
-        <div className="mt-4 text-center">
+        <div className="mt-6 text-center">
           <button
             type="button"
             onClick={toggleMode}
-            className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+            className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 hover:scale-105 transition-all duration-300 inline-block"
           >
             {mode === 'login'
-              ? "Don't have an account? Register"
-              : 'Already have an account? Login'}
+              ? "Don't have an account? Register here →"
+              : '← Already have an account? Login here'}
           </button>
         </div>
       </CardContent>

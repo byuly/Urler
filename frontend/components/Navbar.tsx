@@ -23,10 +23,10 @@ export function Navbar() {
   };
 
   return (
-    <nav className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+    <nav className="sticky top-0 z-50 border-b border-gray-200/50 dark:border-gray-700/50 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl animate-slide-down">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="text-2xl font-bold text-blue-600">
+          <Link href="/" className="text-2xl font-extrabold gradient-text hover:scale-105 transition-transform duration-300">
             Urler
           </Link>
 
@@ -34,17 +34,17 @@ export function Navbar() {
             {isAuthenticated ? (
               <>
                 <Link href="/dashboard">
-                  <Button variant="outline" size="sm">
+                  <Button variant="outline" size="sm" className="hover:scale-105 transition-all duration-300">
                     Dashboard
                   </Button>
                 </Link>
-                <Button variant="secondary" size="sm" onClick={handleLogout}>
+                <Button variant="secondary" size="sm" onClick={handleLogout} className="hover:scale-105 transition-all duration-300">
                   Logout
                 </Button>
               </>
             ) : (
               <Link href="/login">
-                <Button size="sm">Login</Button>
+                <Button size="sm" className="hover:scale-105 transition-all duration-300">Login</Button>
               </Link>
             )}
           </div>

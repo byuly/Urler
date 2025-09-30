@@ -22,8 +22,11 @@ export default function DashboardPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-500">Redirecting to login...</p>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+        <div className="text-center animate-pulse">
+          <div className="text-6xl mb-4">🚀</div>
+          <p className="text-gray-600 dark:text-gray-400 text-lg font-medium">Redirecting to login...</p>
+        </div>
       </div>
     );
   }
@@ -34,18 +37,28 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 py-12">
-      <div className="max-w-5xl mx-auto px-4">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">
-          Dashboard
-        </h1>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 py-12">
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Header */}
+        <div className="mb-12 animate-fade-in">
+          <h1 className="text-5xl font-extrabold mb-3">
+            <span className="gradient-text">Dashboard</span>
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400">
+            Manage your shortened URLs and track real-time analytics
+          </p>
+        </div>
 
-        <div className="space-y-8">
+        <div className="grid gap-8 lg:gap-10">
           {/* URL Shortener Form */}
-          <UrlShortenerForm onUrlShortened={handleUrlShortened} />
+          <div className="animate-slide-up">
+            <UrlShortenerForm onUrlShortened={handleUrlShortened} />
+          </div>
 
           {/* URL List */}
-          <UrlList refreshTrigger={refreshTrigger} />
+          <div className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
+            <UrlList refreshTrigger={refreshTrigger} />
+          </div>
         </div>
       </div>
     </div>

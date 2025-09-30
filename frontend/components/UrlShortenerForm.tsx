@@ -55,48 +55,71 @@ export function UrlShortenerForm({ onUrlShortened }: UrlShortenerFormProps) {
   };
 
   return (
-    <Card>
+    <Card className="animate-scale-in hover:shadow-2xl transition-shadow duration-300">
       <CardHeader>
-        <CardTitle>Shorten Your URL</CardTitle>
+        <CardTitle className="text-2xl"> shorten url </CardTitle>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <Input
-            label="Enter your long URL"
-            placeholder="https://example.com/very/long/url"
-            {...register('url', {
-              required: 'URL is required',
-              pattern: {
-                value: /^https?:\/\/.+/i,
-                message: 'Please enter a valid URL starting with http:// or https://',
-              },
-            })}
-            error={errors.url?.message as string}
-          />
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <div className="relative">
+            <Input
+              label="Enter your long URL"
+              placeholder="https://example.com/very/long/url"
+              {...register('url', {
+                required: 'URL is required',
+                pattern: {
+                  value: /^https?:\/\/.+/i,
+                  message: 'Please enter a valid URL starting with http:// or https://',
+                },
+              })}
+              error={errors.url?.message as string}
+              className="focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+            />
+          </div>
 
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? 'Shortening...' : 'Shorten URL'}
-          </Button>
+          <div className="flex justify-center">
+            <Button
+              type="submit"
+              className={`${isLoading ? 'animate-pulse' : 'hover:scale-105'} transition-all duration-300 shadow-lg hover:shadow-xl px-8`}
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <span className="animate-spin">⚡</span>
+                  Shortening...
+                </span>
+              ) : (
+                '🔗 Shorten URL'
+              )}
+            </Button>
+          </div>
         </form>
 
         {shortenedUrl && (
-          <div className="mt-6 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
-            <h4 className="text-sm font-semibold text-green-800 dark:text-green-300 mb-2">
+          <div className="mt-6 p-5 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border-2 border-green-300 dark:border-green-700 animate-scale-in shadow-lg">
+            <h4 className="text-sm font-bold text-green-800 dark:text-green-300 mb-3 flex items-center gap-2">
+              <span className="text-lg">✅</span>
               Shortened URL:
             </h4>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 mb-3">
               <input
                 readOnly
                 value={`${window.location.origin}/${shortenedUrl.shortenedUrl}`}
-                className="flex-1 px-3 py-2 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md"
+                className="flex-1 px-4 py-3 text-sm font-mono bg-white dark:bg-gray-800 border-2 border-green-300 dark:border-green-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300"
               />
-              <Button size="sm" onClick={copyToClipboard}>
-                Copy
+              <Button size="sm" onClick={copyToClipboard} className="hover:scale-110 transition-transform duration-300 shadow-md">
+                📋 Copy
               </Button>
             </div>
-            <div className="mt-2 text-xs text-gray-600 dark:text-gray-400">
-              <p>Clicks: {shortenedUrl.clicks}</p>
-              <p>Created: {new Date(shortenedUrl.dateCreated).toLocaleString()}</p>
+            <div className="flex gap-4 text-xs text-gray-700 dark:text-gray-300 font-medium">
+              <span className="flex items-center gap-1">
+                <span className="text-base">👆</span>
+                {shortenedUrl.clicks} clicks
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="text-base">📅</span>
+                {new Date(shortenedUrl.dateCreated).toLocaleString()}
+              </span>
             </div>
           </div>
         )}
