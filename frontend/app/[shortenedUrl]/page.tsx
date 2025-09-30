@@ -1,12 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'next/navigation';
 
 export default function RedirectPage() {
   const params = useParams();
   const shortenedUrl = params.shortenedUrl as string;
-  const [error, setError] = useState(false);
 
   useEffect(() => {
     const redirect = () => {
@@ -19,27 +18,6 @@ export default function RedirectPage() {
     const timer = setTimeout(redirect, 500);
     return () => clearTimeout(timer);
   }, [shortenedUrl]);
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            404 - URL Not Found
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
-            The shortened URL you're looking for doesn't exist.
-          </p>
-          <a
-            href="/"
-            className="text-blue-600 hover:text-blue-700 dark:text-blue-400"
-          >
-            Go back home
-          </a>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen flex items-center justify-center">
