@@ -29,11 +29,10 @@ public class UrlController {
 
     @PostMapping("/shorten")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<UrlDto> createShortUrl(@RequestBody Map<String, String> request,
+    public ResponseEntity<UrlDto> createShortUrl(@RequestBody UrlDto requestDto,
                                                         Principal principal){
-        String originalUrl = request.get("url");
         User user = userService.findByUsername(principal.getName());
-        UrlDto urlDto = urlService.createShortUrl(originalUrl, user);
+        UrlDto urlDto = urlService.createShortUrl(requestDto, user);
         return ResponseEntity.ok(urlDto);
     }
 

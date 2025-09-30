@@ -9,6 +9,7 @@ public class UrlDto {
     private Long id;
     private String url;
     private String shortenedUrl;
+    private String customAlias;
     private int clicks;
     private LocalDateTime dateCreated;
     private String username;

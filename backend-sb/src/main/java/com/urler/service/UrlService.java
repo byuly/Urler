@@ -3,6 +3,7 @@ package com.urler.service;
 import com.urler.dto.ClickEventMessage;
 import com.urler.dto.ClicksDto;
 import com.urler.dto.UrlDto;
+import com.urler.exception.AliasAlreadyExistsException;
 import com.urler.table.Clicks;
 import com.urler.table.Url;
 import com.urler.table.User;
@@ -27,10 +28,19 @@ public class UrlService {
     private ClicksRepository clicksRepository;
     private SimpMessagingTemplate messagingTemplate;
 
-    public UrlDto createShortUrl(String originalUrl, User user) {
-        String shortUrl = generateShortUrl();
+    public UrlDto createShortUrl(UrlDto urlDto, User user) {
+        String shortUrl;
+        if (urlDto.getCustomAlias() != null && !urlDto.getCustomAlias().trim().isEmpty()) {
+            if (urlRepository.findByShortenedUrl(urlDto.getCustomAlias()) != null) {
+                throw new AliasAlreadyExistsException("Custom alias '" + urlDto.getCustomAlias() + "' is already taken.");
+            }
+            shortUrl = urlDto.getCustomAlias();
+        } else {
+            shortUrl = generateShortUrl();
+        }
+
         Url url = new Url();
-        url.setUrl(originalUrl);
+        url.setUrl(urlDto.getUrl());
         url.setShortenedUrl(shortUrl);
         url.setUser(user);
         url.setDateCreated(LocalDateTime.now());
