@@ -92,3 +92,8 @@ graph TD
    ```bash
    docker-compose up --build
    ```
+   
+5. **(Optional) To run tests**
+   ```bash
+   ./mvnw test
+   ```
