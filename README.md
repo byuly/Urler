@@ -2,19 +2,12 @@
 
 **Urler** is a full-stack web application for shortening long URLs and tracking their usage with real-time analytics. It provides a clean, intuitive interface for creating short links and monitoring their performance.
 
-## 🚀 Features
-
 * **URL Shortening** – Convert long URLs into short, easy-to-share links.
 * **Click Tracking** – Capture every click on shortened URLs.
 * **Analytics Dashboard** – View click metrics updated in real time.
 * **User Authentication** – Securely manage links under individual accounts.
 
-## 😲 Tech Stack
-
-### Frontend
-
-* **Framework:** Next.js (React)
-* **Language:** TypeScript
+## the tech stack
 
 ### Backend
 
@@ -23,12 +16,17 @@
 * **Real-time Communication:** WebSockets
 * **Security:** Spring Security + JWT
 
+### Frontend
+
+* **Framework:** Next.js (React)
+* **Language:** TypeScript
+
 ### Infrastructure
 
 * **Database:** PostgreSQL
 * **Containerization:** Docker
 
-## Architecture
+## architecture
 
 ```mermaid
 graph TD
@@ -55,15 +53,15 @@ graph TD
 
 ```
 
-## 📦 Getting Started
+## starting application
 
-### Prerequisites
+### prerequisites
 
 * Node.js (>=18)
 * Java (>=17)
 * Docker (optional, for containerized deployment)
 
-### Installation
+### installation
 
 1. **Clone the repository**
 
