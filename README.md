@@ -9,22 +9,22 @@
 
 ## the tech stack
 
-### Backend
+### backend
 
-* **Framework:** Spring Boot
-* **Language:** Java
-* **Real-time Communication:** WebSockets
-* **Security:** Spring Security + JWT
+* **framework:** Spring Boot
+* **language:** Java
+* **real-time communication:** WebSockets
+* **security:** Spring Security + JWT
 
-### Frontend
+### frontend
 
-* **Framework:** Next.js (React)
-* **Language:** TypeScript
+* **framework:** Next.js (React)
+* **language:** TypeScript
 
-### Infrastructure
+### infrastructure
 
-* **Database:** PostgreSQL
-* **Containerization:** Docker
+* **database:** PostgreSQL
+* **containerization:** Docker
 
 ## architecture
 
@@ -63,14 +63,14 @@ graph TD
 
 ### installation
 
-1. **Clone the repository**
+1. **clone the repository**
 
    ```bash
    git clone https://github.com/byuly/Urler.git
    cd urler
    ```
 
-2. **Frontend Setup**
+2. **frontend setup**
 
    ```bash
    cd frontend
@@ -78,20 +78,20 @@ graph TD
    npm run dev
    ```
 
-3. **Backend Setup**
+3. **backend setup**
 
    ```bash
    cd backend
    ./mvnw spring-boot:run
    ```
 
-4. **(Optional) Run with Docker**
+4. **(optional) run with docker**
 
    ```bash
    docker-compose up --build
    ```
    
-5. **(Optional) To run tests**
+5. **(optional) to run tests**
    ```bash
    ./mvnw test
    ```
