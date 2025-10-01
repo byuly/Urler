@@ -34,6 +34,7 @@ export interface UrlDto {
 
 export interface ShortenUrlRequest {
   url: string;
+  customAlias?: string;
 }
 
 // Analytics types

@@ -1,5 +1,6 @@
 package com.urler.controller;
 
+import com.urler.exception.ResourceNotFoundException;
 import com.urler.table.Url;
 import com.urler.service.UrlService;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ public class RedirectController {
             httpHeaders.add("Location", url.getUrl());
             return ResponseEntity.status(302).headers(httpHeaders).build();
         } else {
-            return ResponseEntity.notFound().build();
+            throw new ResourceNotFoundException("Shortened URL '" + shortenedUrl + "' not found.");
         }
     }
 }

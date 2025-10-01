@@ -79,19 +79,19 @@ public class UrlService {
 
     public List<ClicksDto> getClickEventsByDate(String shortenedUrl, LocalDateTime start, LocalDateTime end) {
         Url url = urlRepository.findByShortenedUrl(shortenedUrl);
-        if (url != null) {
-            return clicksRepository.findByUrlAndClickDateBetween(url, start, end).stream()
-                    .collect(Collectors.groupingBy(click -> click.getClickDate().toLocalDate(), Collectors.counting()))
-                    .entrySet().stream()
-                    .map(entry -> {
-                        ClicksDto clicksDto = new ClicksDto();
-                        clicksDto.setClickDate(entry.getKey());
-                        clicksDto.setCount(entry.getValue());
-                        return clicksDto;
-                    })
-                    .collect(Collectors.toList());
+        if (url == null) {
+            throw new com.urler.exception.ResourceNotFoundException("URL '" + shortenedUrl + "' not found.");
         }
-        return null;
+        return clicksRepository.findByUrlAndClickDateBetween(url, start, end).stream()
+                .collect(Collectors.groupingBy(click -> click.getClickDate().toLocalDate(), Collectors.counting()))
+                .entrySet().stream()
+                .map(entry -> {
+                    ClicksDto clicksDto = new ClicksDto();
+                    clicksDto.setClickDate(entry.getKey());
+                    clicksDto.setCount(entry.getValue());
+                    return clicksDto;
+                })
+                .collect(Collectors.toList());
     }
 
     public Map<LocalDate, Long> getTotalClicksByUserAndDate(User user, LocalDate start, LocalDate end) {

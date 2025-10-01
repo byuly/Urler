@@ -29,7 +29,14 @@ export function UrlShortenerForm({ onUrlShortened }: UrlShortenerFormProps) {
     setShortenedUrl(null);
 
     try {
-      const result = await urlAPI.shortenUrl({ url: data.url });
+      const requestData: { url: string; customAlias?: string } = { url: data.url };
+
+      // Only include customAlias if it's not empty
+      if (data.customAlias && data.customAlias.trim()) {
+        requestData.customAlias = data.customAlias.trim();
+      }
+
+      const result = await urlAPI.shortenUrl(requestData);
 
       if (result.success) {
         setShortenedUrl(result.data);
@@ -75,6 +82,24 @@ export function UrlShortenerForm({ onUrlShortened }: UrlShortenerFormProps) {
               error={errors.url?.message as string}
               className="focus:ring-2 focus:ring-blue-500 transition-all duration-300"
             />
+          </div>
+
+          <div className="relative">
+            <Input
+              label="Custom Alias (optional)"
+              placeholder="my-custom-link"
+              {...register('customAlias', {
+                pattern: {
+                  value: /^[a-zA-Z0-9_-]{3,20}$/,
+                  message: 'Alias must be 3-20 characters (letters, numbers, hyphens, underscores only)',
+                },
+              })}
+              error={errors.customAlias?.message as string}
+              className="focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+            />
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              Leave blank for a random alias
+            </p>
           </div>
 
           <div className="flex justify-center">
